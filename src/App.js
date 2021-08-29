@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+
+
+export default function App() {
+  const [todos, setTodos] = useState([
+    {id: 1, title: 'Ir ao supermercado', done: false},
+    {id: 2, title: 'Ir ao churrasco', done: false},
+    {id: 3, title: 'Voltar ao autodromo', done: false}
+  ]);
+
+  const handleFormSubmit = e => {
+    //previne que a pagina resete
+    e.preventDefault();
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        {
+          todos.map(item => (
+            <div key={item.id}>{item.title}</div>
+          ))
+        } 
+        <br/>
+        <hr />
+        <br/>
+
+        <form onSubmit={handleFormSubmit}>
+          <input type="text" name="todo" id="title" placeholder="nova tarefa..." />
+          <button>Adicionar</button>
+        </form>
     </div>
   );
 }
 
-export default App;
